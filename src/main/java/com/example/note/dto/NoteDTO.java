@@ -1,39 +1,30 @@
-package com.example.note.entities;
+package com.example.note.dto;
 
 import com.example.note.utils.NoteType;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Entity
-public class NoteEntity {
+public class NoteDTO {
 
-    @Id
-    @GeneratedValue(generator = "uuid4")
-    @GenericGenerator(name = "UUID", strategy = "uuid4")
-    @Type(type = "org.hibernate.type.UUIDCharType")
-    @Column(columnDefinition = "CHAR(36)")
     private UUID id;
 
     private String title;
 
-    @Enumerated(EnumType.STRING)
     private NoteType noteType;
 
     private String content;
 
-
+    @NotNull
+    @Length(min = 3, max = 10)
     private String keyWord;
 
     private LocalDate created;
 
-    public NoteEntity() {
-    }
-
-    public NoteEntity(UUID id, String title, NoteType noteType, String content, String keyWord, LocalDate created) {
+    public NoteDTO(UUID id, String title, NoteType noteType, String content, String keyWord, LocalDate created) {
         this.id = id;
         this.title = title;
         this.noteType = noteType;
@@ -78,16 +69,16 @@ public class NoteEntity {
         return keyWord;
     }
 
-    public void setKeyWord(String key) {
-        this.keyWord = key;
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
     }
 
     public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDate creationDate) {
-        this.created = creationDate;
+    public void setCreated(LocalDate created) {
+        this.created = created;
     }
 
 }

@@ -1,5 +1,5 @@
 package com.example.note.utils;
 
-public enum Type {
+public enum NoteType {
     COMMENT, OPINION, TODO
 }
