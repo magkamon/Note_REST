@@ -89,5 +89,4 @@ public class NoteEntity {
     public void setCreated(LocalDate creationDate) {
         this.created = creationDate;
     }
-
 }

@@ -12,6 +12,4 @@ public interface NoteRepository extends JpaRepository<NoteEntity, UUID> {
 
     @Query(value = "SELECT n FROM NoteEntity n WHERE n.keyWord = :keyWord")
     List<NoteEntity> findByKeyWord(String keyWord);
-
-    Optional<NoteEntity> findById(UUID uuid);
 }

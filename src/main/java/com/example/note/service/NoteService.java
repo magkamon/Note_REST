@@ -2,6 +2,7 @@ package com.example.note.service;
 
 import com.example.note.dto.*;
 import com.example.note.entities.NoteEntity;
+import com.example.note.errors.NoteNotFoundException;
 import com.example.note.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,17 +22,17 @@ public class NoteService {
     }
 
     @Transactional
-    public NoteDTO saveNote(NoteDTO noteDTO) {
+    public IdDTO saveNote(NoteDTO noteDTO) {
         NoteEntity noteEntity = noteDTOToNoteEntity.apply(noteDTO);
-        return noteEntityToNoteDTO.apply(noteRepository.save(noteEntity));
+        return noteEntityToIdDTO.apply(noteRepository.save(noteEntity));
     }
 
     public List<NoKeyWordNoteDTO> findByKeyWord(KeyWordDTO keyWord) {
         return noteRepository.findByKeyWord(keyWord.getKeyWord()).stream().map(noteEntityToNoKeyWordNoteDTO).collect(toList());
     }
 
-    public List<NoIdNoteDTO> findById(IdDTO idDTO) {
-        return noteRepository.findById(idDTO.getId()).stream().map(noteEntityToIdNoteDTO).collect(toList());
+    public NoIdNoteDTO findById(IdDTO idDTO) throws NoteNotFoundException {
+        NoteEntity noteEntity = noteRepository.findById(idDTO.getId()).orElseThrow(NoteNotFoundException::new);
+        return noteEntityToIdNoteDTO.apply(noteEntity);
     }
-
 }

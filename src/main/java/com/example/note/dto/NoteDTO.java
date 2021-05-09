@@ -3,7 +3,6 @@ package com.example.note.dto;
 import com.example.note.utils.NoteType;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -80,5 +79,4 @@ public class NoteDTO {
     public void setCreated(LocalDate created) {
         this.created = created;
     }
-
 }

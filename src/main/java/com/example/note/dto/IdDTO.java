@@ -6,7 +6,8 @@ public class IdDTO {
 
     private UUID id;
 
-    public IdDTO(){}
+    public IdDTO() {
+    }
 
     public IdDTO(UUID id) {
         this.id = id;

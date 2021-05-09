@@ -1,6 +1,7 @@
 package com.example.note.controller;
 
 import com.example.note.dto.*;
+import com.example.note.errors.NoteNotFoundException;
 import com.example.note.service.NoteService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class NoteController {
     }
 
     @PostMapping("/add")
-    public NoteDTO saveNote(@Valid @RequestBody NoteDTO noteDTO) {
+    public IdDTO saveNote(@Valid @RequestBody NoteDTO noteDTO) {
         noteDTO.setCreated(LocalDate.now());
         return noteService.saveNote(noteDTO);
     }
@@ -33,8 +34,7 @@ public class NoteController {
     }
 
     @PostMapping("/get")
-    public List<NoIdNoteDTO> findById(@RequestBody IdDTO idDTO) {
+    public NoIdNoteDTO findById(@RequestBody IdDTO idDTO) throws NoteNotFoundException {
         return noteService.findById(idDTO);
     }
-
 }

@@ -1,5 +1,6 @@
 package com.example.note.functions;
 
+import com.example.note.dto.IdDTO;
 import com.example.note.dto.NoIdNoteDTO;
 import com.example.note.dto.NoKeyWordNoteDTO;
 import com.example.note.dto.NoteDTO;
@@ -35,7 +36,6 @@ public class NoteFunctions {
             noteEntity.getCreated()
     );
 
-
     public static final Function<NoteEntity, NoIdNoteDTO> noteEntityToIdNoteDTO = noteEntity -> new NoIdNoteDTO(
             noteEntity.getTitle(),
             noteEntity.getType(),
@@ -44,4 +44,7 @@ public class NoteFunctions {
             noteEntity.getCreated()
     );
 
+    public static final Function<NoteEntity, IdDTO> noteEntityToIdDTO = noteEntity -> new IdDTO(
+            noteEntity.getId()
+    );
 }
