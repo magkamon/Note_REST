@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+
+  db:
+    image: mysql:8
+    container_name: notes_db
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: notes
+      MYSQL_USER: notes_db_user
+      MYSQL_PASSWORD: somePassword123
+    ports:
+      - "3307:3306"
+
+volumes:
+  db_data:
